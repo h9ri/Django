@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>churn</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+          $('.apireq').click( function() {
+    $.ajax({
+             url : "http://localhost:8000/data",
+             dataType: "json",
+             success : function (data) {
+                      $('#first_name').text( data[0].id);
+                      $('#last_name').text( data[0].number_of_unbarred);
+                      $('#age').text( data[0].age);
+                      $('#gender').text( data[0].total_monthly_bill);
+                    }
+                 });
+             });
+
+   </script>
+ </head>
+<body>
+<div>
+   <button class="apireq">click me </button> 
+</div>
+<div id="jsonresp" style="margin-top: 100px">
+   <p><label> First name :</label> <span id="first_name"></span></p>
+   <p><label> Last name hfgfgf:</label> <span id="last_name"></span></p>
+   <p><label> age :</label> <span id="age"></span></p>
+   <p><label> gender : </label> <span id="gender"></span></p> 
+</div>
+    <script type="text/javascript">
+
+    </script>
+</body>
+</html>

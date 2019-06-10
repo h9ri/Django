@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PLOTLY GRAPH</title>
+</head>
+
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<body>
+<button>Click me</button>
+	{% if graph %}
+	<div style="width:600;height:500">
+	{{ graph|safe }}
+</div>
+{% endif %}
+
+
+</body>
+</html>

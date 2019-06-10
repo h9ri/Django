@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>churn</title>
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+<center><h3> CHURN PREDICTION </h3></center>
+{%for i in df%}
+<p>{{i.id}} {{i.age}}  {{i.total_monthly_bill}}</p>
+{%endfor%}
+<form action="http://localhost:8000/search/" method="GET" id="FORM-ID">
+    <input id="id" type="text" name="id">
+    <input type="submit" value="Submit">
+</form>
+
+<button onclick="myFunction()">Age>29</button>
+<button onclick="myFunction_2()"> Age>43 </button>
+<button class="graph"> Age>43 </button>
+<div>
+   <button class="apireq">click me </button> 
+</div>
+<p id="demo"></p>
+ <p id="return"></p>
+</body>
+<script type="text/javascript">
+var frm = $('#FORM-ID');;
+ $(document).ready(function() {
+  $(".apireq").click(function () {
+    $.ajax({
+             url : "http://localhost:8000/click/",
+             type :'GET',
+             cache:'false',
+             success: function(data) { 
+             //alert("success");
+             $('#demo').text( data[0].id);
+             },
+             error: function(error) { 
+              alert('error; '+ (error));
+              console.log(error)
+              }
+});
+  });
+frm.submit(function () {
+        $.ajax({
+            type:frm.attr('method'),
+            url:"http://localhost:8000/search/",
+            data : {"value" :$('id').text()},
+            success: function (result) {
+                $("#return").html(result);
+            },
+            error: function(result) {
+                $("#return").html("Something went wrong!");
+                console.log(result);
+            }
+        });
+        return false;
+    });
+});
+
+ function myFunction() {
+    document.getElementById("demo").innerHTML = "{% for i in df %}{% if i.age >= '29' %}<div>{{i.id}} {{i.age}}  {{i.total_monthly_bill}}</div>{%endif%}{%endfor%}";
+  }
+    function myFunction_2() {
+    document.getElementById("demo").innerHTML = "{% for i in df %}{% if i.age >= '43' %}<div>{{i.id}} {{i.age}}  {{i.total_monthly_bill}}</div>{%endif%}{%endfor%}";
+  }
+</script>
+
+</html>

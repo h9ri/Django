@@ -1,0 +1,18 @@
+$(document).ready(function() {
+  $('.apireq').click( function() {
+    $.ajax({
+             url : "http://localhost:8000/click",
+             dataType: "json",
+             success : function (data) {
+                      $('#demo').text( data[0]);
+                      }
+
+                 });
+             });
+});
+function myFunction() {
+    document.getElementById("demo").innerHTML = "{% for i in df %}{% if i.age >= '29' %}<div>{{i.id}} {{i.age}}  {{i.total_monthly_bill}}</div>{%endif%}{%endfor%}";
+  }
+    function myFunction_2() {
+    document.getElementById("demo").innerHTML = "{% for i in df %}{% if i.age >= '43' %}<div>{{i.id}} {{i.age}}  {{i.total_monthly_bill}}</div>{%endif%}{%endfor%}";
+  }
